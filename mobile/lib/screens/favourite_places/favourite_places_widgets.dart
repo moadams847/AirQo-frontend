@@ -23,6 +23,13 @@ class FavouritePlaceCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Container(
           decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(40, 0, 0, 0),
+                blurRadius: 1.0,
+                spreadRadius: 0.5,
+              ),
+            ],
             color: Colors.white,
             borderRadius: BorderRadius.all(
               Radius.circular(8.0),
