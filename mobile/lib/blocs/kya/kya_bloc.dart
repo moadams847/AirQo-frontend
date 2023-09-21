@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:app/models/models.dart';
 import 'package:app/services/services.dart';
+import 'package:app/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -26,14 +27,10 @@ class KyaBloc extends HydratedBloc<KyaEvent, KyaState> {
     Emitter<KyaState> emit,
   ) {
     Quiz quiz = shuffleQuizQuestions.quiz;
-    quiz.questions.shuffle();
-
-    // update quiz in state
+    quiz.shuffleQuestions();
     List<Quiz> quizzes = state.quizzes;
     quizzes.removeWhere((element) => element.id == quiz.id);
     quizzes.add(quiz);
-    //
-
     emit(state.copyWith(quizzes: quizzes));
   }
 

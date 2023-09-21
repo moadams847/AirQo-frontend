@@ -133,6 +133,21 @@ extension QuizExt on Quiz {
         return AppLocalizations.of(context)!.continu;
     }
   }
+
+  List<QuizQuestion> shuffleQuestions() {
+    List<QuizQuestion> shuffledQuestions = questions;
+    shuffledQuestions.shuffle();
+
+    List<QuizQuestion> quizQuestions = questions.map((e) {
+      QuizQuestion shuffledQuestion = questions.firstWhere(
+        (element) => e.id == element.id,
+        orElse: () => e,
+      );
+      return shuffledQuestion.copyWith(id: e.id);
+    }).toList();
+    quizQuestions.sort((x, y) => x.id.compareTo(y.id));
+    return quizQuestions;
+  }
 }
 
 extension KyaListExt on List<KyaLesson> {

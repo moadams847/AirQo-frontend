@@ -97,13 +97,12 @@ class Quiz extends Equatable {
 
 @JsonSerializable(explicitToJson: true)
 class QuizQuestion extends Equatable {
-  const QuizQuestion({
-    required this.id,
-    required this.title,
-    required this.context,
-    required this.answers,
-      required this.questionPosition
-  });
+  const QuizQuestion(
+      {required this.id,
+      required this.title,
+      required this.context,
+      required this.answers,
+      required this.questionPosition});
 
   factory QuizQuestion.fromJson(Map<String, dynamic> json) {
     return _$QuizQuestionFromJson(json);
@@ -122,6 +121,16 @@ class QuizQuestion extends Equatable {
 
   @JsonKey(name: 'answers')
   final List<QuizAnswer> answers;
+
+  QuizQuestion copyWith({String? id}) {
+    return QuizQuestion(
+      id: id ?? this.id,
+      title: title,
+      context: context,
+      answers: answers,
+      questionPosition: questionPosition,
+    );
+  }
 
   Map<String, dynamic> toJson() => _$QuizQuestionToJson(this);
 
