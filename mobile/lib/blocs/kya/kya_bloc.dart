@@ -17,7 +17,24 @@ class KyaBloc extends HydratedBloc<KyaEvent, KyaState> {
     on<FetchKya>(_onFetchKya);
     on<FetchQuizzes>(_onFetchQuizzes);
     on<UpdateQuizProgress>(_onUpdateQuizProgress);
+    on<ShuffleQuizQuestions>(_onShuffleQuizQuestions);
     on<ClearQuizzes>(_onClearQuizzes);
+  }
+
+  void _onShuffleQuizQuestions(
+    ShuffleQuizQuestions shuffleQuizQuestions,
+    Emitter<KyaState> emit,
+  ) {
+    Quiz quiz = shuffleQuizQuestions.quiz;
+    quiz.questions.shuffle();
+
+    // update quiz in state
+    List<Quiz> quizzes = state.quizzes;
+    quizzes.removeWhere((element) => element.id == quiz.id);
+    quizzes.add(quiz);
+    //
+
+    emit(state.copyWith(quizzes: quizzes));
   }
 
   Future<void> _onFetchQuizzes(

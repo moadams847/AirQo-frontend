@@ -42,6 +42,14 @@ class ClearQuizzes extends KyaEvent {
   List<Object> get props => [];
 }
 
+class ShuffleQuizQuestions extends KyaEvent {
+  const ShuffleQuizQuestions(this.quiz);
+  final Quiz quiz;
+
+  @override
+  List<Object> get props => [quiz];
+}
+
 class UpdateQuizProgress extends KyaEvent {
   const UpdateQuizProgress(this.quiz, {this.updateRemote = false});
 

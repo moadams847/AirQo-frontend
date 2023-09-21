@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:app/blocs/blocs.dart';
 import 'package:app/models/models.dart';
 import 'package:app/screens/quiz/quiz_view.dart';
 import 'package:app/screens/quiz/quiz_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,6 +29,7 @@ Future<dynamic> bottomSheetQuizConffeti(
     builder: (context) {
       return StatefulBuilder(
         builder: (context, setState) {
+          context.read<KyaBloc>().add(ShuffleQuizQuestions(quiz));
           Future.delayed(const Duration(seconds: 6), () {
             Navigator.of(context).pop();
             completer.complete();
